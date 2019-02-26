@@ -1,0 +1,52 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  font-family: Lato, Arial, Helvetica, sans-serif;
+  font-size: 0.85em;
+  width: 160px;
+  margin: 10px 0px 20px 30px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: normal;
+  margin: 1px 0px;
+}
+
+.ad_image {
+  width: 160px;
+  height: 160px;
+  padding-bottom: 3px;
+}
+
+.name {
+  color: #0066c0;
+  font-weight: normal;
+  margin: 0px;
+  text-decoration: none;
+}
+
+.name:hover {
+  color: #B12704;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.review_count {
+  padding-top: 2px;
+  color: #0066c0;
+}
+
+.review_count:hover {
+  cursor: pointer;
+}
+
+.price {
+  color: #B12704;
+}
+
+.prime {
+  margin-left: 0.1em;
+  height: 1.4em;
+}
