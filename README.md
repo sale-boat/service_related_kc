@@ -19,8 +19,8 @@
 ## Table of Contents
 
 1. [Usage](#Usage)
-2. [Requirements](#requirements)
-3. [Development](#development)
+2. [Requirements](#Requirements)
+3. [APIs](#APIs)
 
 ## Usage
 
@@ -35,8 +35,107 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 - Node 6.13.0
 - npm 6.4.1
 
-## Development
+## APIs
+#### GET Related Items
+Gets related items for a specific product ID. Returns all data matching product ID.
 
-### Installing Dependencies
+##### Example
+```js
+fetch('/related/:productId')
+```
 
-none
+##### Returns
+```js
+[
+  {
+    "id": Number,
+    "product_id": Number,
+    "product_name": String,
+    "product_thumnail": String,
+    "price": Number
+  },
+  ...
+]
+```
+
+#### POST Related Items
+Adds a related item to the database. Returns added data.
+
+##### Example
+```js
+fetch('/related/', {
+  method: 'POST',
+  body: {
+    "product_id": Number,
+    "product_name": String,
+    "product_thumnail": String,
+    "price": Number
+  },
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+```
+
+##### Returns
+```js
+{
+  "id": Number,
+  "product_id": Number,
+  "product_name": String,
+  "product_thumnail": String,
+  "price": Number
+  "success": Boolean
+}
+```
+
+#### PUT Related Items
+Adds a related item to the database. Body does not need to include all fields, only those that need to be updated. Returns updated data.
+
+##### Example
+```js
+fetch('/related/:relatedId', {
+  method: 'PUT',
+  body: {
+    "product_id": Number,
+    "product_name": String,
+    "product_thumnail": String,
+    "price": Number
+  },
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+```
+
+##### Returns
+```js
+{
+  "id": Number,
+  "product_id": Number,
+  "product_name": String,
+  "product_thumnail": String,
+  "price": Number
+}
+```
+
+#### DELETE Related Items
+Delete a related item from the database. Returns deleted data.
+
+##### Example
+```js
+fetch('/related/:relatedId', {
+  method: 'DELETE'
+})
+```
+
+##### Returns
+```js
+{
+  "id": Number,
+  "product_id": Number,
+  "product_name": String,
+  "product_thumnail": String,
+  "price": Number
+}
+```

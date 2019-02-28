@@ -7,29 +7,27 @@ const router = require('./server/controllers/router.js');
 const app = express();
 
 app.use(morgan('tiny'));
-
 app.use(cors());
-
 app.use(compression());
 
-app.get('/api/bundle.js', (req, res) => {
-  res.sendFile(`${__dirname}/dist/bundle.js`);
-});
+app.use(express.static(`${__dirname}/dist/`));
 
-app.get('/api/bundle', (req, res) => {
-  res.sendFile(`${__dirname}/dist/bundle.js`);
-});
+// API routes
+app.get('/api/products/(:productId)?', router.readRelationship);
+app.route('/api/related/(:id)?')
+  .get((req, res) => {
+    res.send(`Getting data: ${req.params.id}`);
+  })
+  .post((req, res) => {
+    res.send('Posting data');
+  })
+  .put((req, res) => {
+    res.send(`Updating data: ${req.params.id}`);
+  })
+  .delete((req, res) => {
+    res.send(`Deleting data: ${req.params.id}`);
+  });
 
-app.use(express.static(`${__dirname}/dist`));
-
-app.get('/api/products/:productId/', router.readRelationship);
-
-app.get('/products/:id', (req, res) => {
-  res.sendFile(`${__dirname}/dist/index.html`);
-});
-
-app.get('*', (req, res) => {
-  res.redirect('/products/1');
-});
+app.use('/:id', express.static(`${__dirname}/dist/`));
 
 app.listen(3007, console.log('listening to 3007'));

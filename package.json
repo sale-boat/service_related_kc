@@ -4,7 +4,7 @@
   "description": "Visual and functional clone of the amazon product ad carousel",
   "main": "index.js",
   "scripts": {
-    "seed": "node server/helpers/seed.js && echo 'database built'",
+    "seed": "node server/helpers/seedProducts.js && node server/helpers/seedJunction.js && echo 'database built'",
     "dev-build": "mkdir dist; cp ./src/index.html ./dist/index.html && webpack -d --watch",
     "dev-start": "nodemon",
     "start": "webpack -p && cp ./src/index.html ./dist/index.html && node index.js",
