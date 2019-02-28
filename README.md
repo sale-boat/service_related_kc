@@ -54,9 +54,12 @@ Where `:productId` represents the ID of the product page currently loaded.
 [
   {
     "id": 301,
+    "source_product_id": 12,
     "product_id": 1,
     "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
     "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
+    "product_rating": 4.5,
+    "product_rating_count": 1234
     "price": 1199
   },
   ...
@@ -67,9 +70,12 @@ Where `:productId` represents the ID of the product page currently loaded.
 Key|Type|Description
 ---|:---:|---
 id|`Number`|ID of the Product <-> Related relationship.
+source_product_id|`Number`|Product ID of source product (:productId).
 product_id|`Number`|Product ID of related product.
 product_name|`String`|Name of related product.
 product_thumbnail|`String`|URL of the related product image.
+product_rating|`Number`|The rating of related product.
+product_rating_count|`Number`|The number of ratings of related product.
 price|`Number`|Price of related product (in cents).
 
 #### POST Related Items
@@ -80,10 +86,8 @@ Adds a related item to the database. Returns added data.
 fetch('/related/', {
   method: 'POST',
   body: {
-    "product_id": 1,
-    "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
-    "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
-    "price": 1199
+    "source_product_id": 12,
+    "product_id": 1
   },
   headers: {
     "Content-Type": "application/json"
@@ -94,18 +98,18 @@ fetch('/related/', {
 ###### POST Example Properties
 Key|Type|Description
 ---|:---:|---
+source_product_id|`Number`|Product ID of source product (:productId).
 product_id|`Number`|Product ID of related product.
-product_name|`String`|Name of related product.
-product_thumbnail|`String`|URL of the related product image.
-price|`Number`|Price of related product (in cents).
 
 ##### POST Returns
 ```js
 {
   "id": 301,
+  "source_product_id": 12,
   "product_id": 1,
   "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
-  "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
+  "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",    "product_rating": 4.5,
+  "product_rating_count": 1234
   "price": 1199
 }
 ```
@@ -114,9 +118,12 @@ price|`Number`|Price of related product (in cents).
 Key|Type|Description
 ---|:---:|---
 id|`Number`|ID of the Product <-> Related relationship.
+source_product_id|`Number`|Product ID of source product.
 product_id|`Number`|Product ID of related product.
 product_name|`String`|Name of related product.
 product_thumbnail|`String`|URL of the related product image.
+product_rating|`Number`|The rating of related product.
+product_rating_count|`Number`|The number of ratings of related product.
 price|`Number`|Price of related product (in cents).
 
 #### PUT Related Items
@@ -127,10 +134,8 @@ Adds a related item to the database. Body does not need to include all fields, o
 fetch('/related/:relatedId', {
   method: 'PUT',
   body: {
-    "product_id": 1,
-    "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
-    "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
-    "price": 1199
+    "source_product_id": 12,
+    "product_id": 1
   },
   headers: {
     "Content-Type": "application/json"
@@ -142,18 +147,19 @@ Where `:relatedId` represents the ID of the Product <-> Related relationship.
 ###### PUT Example Properties
 Key|Type|Description
 ---|:---:|---
+source_product_id|`Number`|Product ID of source product.
 product_id|`Number`|Product ID of related product.
-product_name|`String`|Name of related product.
-product_thumbnail|`String`|URL of the related product image.
-price|`Number`|Price of related product (in cents).
 
 ##### PUT Returns
 ```js
 {
   "id": 301,
+  "source_product_id": 12,
   "product_id": 1,
   "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
   "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
+  "product_rating": 4.5,
+  "product_rating_count": 1234
   "price": 1199
 }
 ```
@@ -162,9 +168,12 @@ price|`Number`|Price of related product (in cents).
 Key|Type|Description
 ---|:---:|---
 id|`Number`|ID of the Product <-> Related relationship.
+source_product_id|`Number`|Product ID of source product.
 product_id|`Number`|Product ID of related product.
 product_name|`String`|Name of related product.
 product_thumbnail|`String`|URL of the related product image.
+product_rating|`Number`|The rating of related product.
+product_rating_count|`Number`|The number of ratings of related product.
 price|`Number`|Price of related product (in cents).
 
 #### DELETE Related Items
@@ -182,9 +191,12 @@ Where `:relatedId` represents the ID of the Product <-> Related relationship.
 ```js
 {
   "id": 301,
+  "source_product_id": 12,
   "product_id": 1,
   "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
   "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
+  "product_rating": 4.5,
+  "product_rating_count": 1234
   "price": 1199
 }
 ```
@@ -193,7 +205,10 @@ Where `:relatedId` represents the ID of the Product <-> Related relationship.
 Key|Type|Description
 ---|:---:|---
 id|`Number`|ID of the Product <-> Related relationship.
+source_product_id|`Number`|Product ID of source product.
 product_id|`Number`|Product ID of related product.
 product_name|`String`|Name of related product.
 product_thumbnail|`String`|URL of the related product image.
+product_rating|`Number`|The rating of related product.
+product_rating_count|`Number`|The number of ratings of related product.
 price|`Number`|Price of related product (in cents).
