@@ -14,6 +14,19 @@ app.use(express.static(`${__dirname}/dist/`));
 
 // API routes
 app.get('/api/products/(:productId)?', router.readRelationship);
+app.route('/api/related/(:id)?')
+  .get((req, res) => {
+    res.send(`Getting data: ${req.params.id}`);
+  })
+  .post((req, res) => {
+    res.send('Posting data');
+  })
+  .put((req, res) => {
+    res.send(`Updating data: ${req.params.id}`);
+  })
+  .delete((req, res) => {
+    res.send(`Deleting data: ${req.params.id}`);
+  });
 
 app.use('/:id', express.static(`${__dirname}/dist/`));
 
