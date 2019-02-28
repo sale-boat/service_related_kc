@@ -1,7 +1,14 @@
 # Product Advertisement Carousels
 
-> This service aims to clone the visual and functional style of Amazon.com's 
-  product carousel modules. The key features to be created are:
+## Table of Contents
+
+1. [Key Features](#Key-Features)
+2. [Related](#Related-Projects)
+3. [Usage](#Usage)
+4. [Requirements](#Requirements)
+5. [APIs](#APIs)
+
+## Key Features
   * Dynamic links to other products
   * Responsiveness to changing browser width, and mobile screens
   * Respond to button clicks to scroll through more items
@@ -12,15 +19,11 @@
 
 ## Related Projects
 
-  - https://github.com/amazonians-110/add_to_cart-chris
-  - https://github.com/amazonians-110/product-reviews-victor
-  - https://github.com/amazonians-110/product-gallery-summary
+  - [Photos](https://github.com/sale-boat/service_photos_mh)
+  - [Cart](https://github.com/sale-boat/service_cart_ls)
+  - [Reviews](https://github.com/sale-boat/service_reviews_lh)
+  - [Proxy](https://github.com/sale-boat/proxy_kc)
 
-## Table of Contents
-
-1. [Usage](#Usage)
-2. [Requirements](#Requirements)
-3. [APIs](#APIs)
 
 ## Usage
 
@@ -36,40 +39,51 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 - npm 6.4.1
 
 ## APIs
+
 #### GET Related Items
 Gets related items for a specific product ID. Returns all data matching product ID.
 
-##### Example
+##### GET Example
 ```js
 fetch('/related/:productId')
 ```
+Where `:productId` represents the ID of the product page currently loaded.
 
-##### Returns
+##### GET Returns
 ```js
 [
   {
-    "id": Number,
-    "product_id": Number,
-    "product_name": String,
-    "product_thumnail": String,
-    "price": Number
+    "id": 301,
+    "product_id": 1,
+    "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
+    "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
+    "price": 1199
   },
   ...
 ]
 ```
 
+###### GET Return Properties
+Key|Type|Description
+---|:---:|---
+id|`Number`|ID of the Product <-> Related relationship.
+product_id|`Number`|Product ID of related product.
+product_name|`String`|Name of related product.
+product_thumbnail|`String`|URL of the related product image.
+price|`Number`|Price of related product (in cents).
+
 #### POST Related Items
 Adds a related item to the database. Returns added data.
 
-##### Example
+##### POST Example
 ```js
 fetch('/related/', {
   method: 'POST',
   body: {
-    "product_id": Number,
-    "product_name": String,
-    "product_thumnail": String,
-    "price": Number
+    "product_id": 1,
+    "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
+    "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
+    "price": 1199
   },
   headers: {
     "Content-Type": "application/json"
@@ -77,65 +91,109 @@ fetch('/related/', {
 })
 ```
 
-##### Returns
+###### POST Example Properties
+Key|Type|Description
+---|:---:|---
+product_id|`Number`|Product ID of related product.
+product_name|`String`|Name of related product.
+product_thumbnail|`String`|URL of the related product image.
+price|`Number`|Price of related product (in cents).
+
+##### POST Returns
 ```js
 {
-  "id": Number,
-  "product_id": Number,
-  "product_name": String,
-  "product_thumnail": String,
-  "price": Number
-  "success": Boolean
+  "id": 301,
+  "product_id": 1,
+  "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
+  "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
+  "price": 1199
 }
 ```
+
+###### POST Return Properties
+Key|Type|Description
+---|:---:|---
+id|`Number`|ID of the Product <-> Related relationship.
+product_id|`Number`|Product ID of related product.
+product_name|`String`|Name of related product.
+product_thumbnail|`String`|URL of the related product image.
+price|`Number`|Price of related product (in cents).
 
 #### PUT Related Items
 Adds a related item to the database. Body does not need to include all fields, only those that need to be updated. Returns updated data.
 
-##### Example
+##### PUT Example
 ```js
 fetch('/related/:relatedId', {
   method: 'PUT',
   body: {
-    "product_id": Number,
-    "product_name": String,
-    "product_thumnail": String,
-    "price": Number
+    "product_id": 1,
+    "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
+    "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
+    "price": 1199
   },
   headers: {
     "Content-Type": "application/json"
   }
 })
 ```
+Where `:relatedId` represents the ID of the Product <-> Related relationship.
 
-##### Returns
+###### PUT Example Properties
+Key|Type|Description
+---|:---:|---
+product_id|`Number`|Product ID of related product.
+product_name|`String`|Name of related product.
+product_thumbnail|`String`|URL of the related product image.
+price|`Number`|Price of related product (in cents).
+
+##### PUT Returns
 ```js
 {
-  "id": Number,
-  "product_id": Number,
-  "product_name": String,
-  "product_thumnail": String,
-  "price": Number
+  "id": 301,
+  "product_id": 1,
+  "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
+  "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
+  "price": 1199
 }
 ```
+
+###### PUT Return Properties
+Key|Type|Description
+---|:---:|---
+id|`Number`|ID of the Product <-> Related relationship.
+product_id|`Number`|Product ID of related product.
+product_name|`String`|Name of related product.
+product_thumbnail|`String`|URL of the related product image.
+price|`Number`|Price of related product (in cents).
 
 #### DELETE Related Items
 Delete a related item from the database. Returns deleted data.
 
-##### Example
+##### DELETE Example
 ```js
 fetch('/related/:relatedId', {
   method: 'DELETE'
 })
 ```
+Where `:relatedId` represents the ID of the Product <-> Related relationship.
 
-##### Returns
+##### DELETE Returns
 ```js
 {
-  "id": Number,
-  "product_id": Number,
-  "product_name": String,
-  "product_thumnail": String,
-  "price": Number
+  "id": 301,
+  "product_id": 1,
+  "product_name": "Carlie Cute Cat Glass Cup Tea Mug",
+  "product_thumbnail": "https://images-na.ssl-images-amazon.com/images/I/51KZpKpdBwL._AC_UL160_SR160,160_.jpg",
+  "price": 1199
 }
 ```
+
+###### DELETE Return Properties
+Key|Type|Description
+---|:---:|---
+id|`Number`|ID of the Product <-> Related relationship.
+product_id|`Number`|Product ID of related product.
+product_name|`String`|Name of related product.
+product_thumbnail|`String`|URL of the related product image.
+price|`Number`|Price of related product (in cents).
