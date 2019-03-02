@@ -38,6 +38,10 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 - Node 6.13.0
 - npm 6.4.1
 
+## Seeding Data
+
+Use 'npm run seed-postgres' to seed data into postgres
+
 ## APIs
 
 #### GET Related Items

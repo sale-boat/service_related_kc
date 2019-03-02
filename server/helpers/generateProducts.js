@@ -5,10 +5,11 @@ const fs = require('fs');
 const { Transform } = require('stream');
 
 const start = Date.now();
-const readable = fs.createReadStream('../../dist/products-raw.csv');
-const writable = fs.createWriteStream('../../dist/products.csv');
+const readable = fs.createReadStream(`${__dirname}/../../dist/products-sample.csv`);
+const writable = fs.createWriteStream(`${__dirname}/../../dist/products.csv`);
 const regex = /\/([^"/]+)"/g;
 let lastMatch;
+let first = true;
 
 const addData = new Transform({ objectMode: true });
 addData._transform = function (chunk, encoding, done) {
@@ -23,7 +24,12 @@ addData._transform = function (chunk, encoding, done) {
   lines.forEach((line, index) => {
     const match = line.match(regex);
     if (match) [lastMatch] = match;
-    lines[index] = line.concat(`,"http://lorempixel.com/160/160${lastMatch}\n`);
+    let concatVal = `,"http://lorempixel.com/160/160${lastMatch}\n`;
+    if (first) {
+      concatVal = ',thumbnail_image\n';
+      first = false;
+    }
+    lines[index] = line.concat(concatVal);
   });
 
   lines.forEach(this.push.bind(this));

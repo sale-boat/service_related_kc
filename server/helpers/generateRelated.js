@@ -4,7 +4,7 @@ const fs = require('fs');
 const randIdx = length => Math.floor(Math.random() * length);
 
 // Generate related CSV
-const csv = fs.createWriteStream('../../dist/related.csv');
+const csv = fs.createWriteStream(`${__dirname}/../../dist/related.csv`);
 const start = Date.now();
 let i = 10000000;
 let rows = randIdx(25);
