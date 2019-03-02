@@ -11,7 +11,7 @@ let rows = randIdx(25);
 
 const generateData = () => `${i},${randIdx(10000000)}`;
 
-const generateRow = (last) => {
+const generateRow = () => {
   let str = '';
 
   if (rows > 1) {
@@ -22,10 +22,7 @@ const generateRow = (last) => {
     i -= 1;
     rows = randIdx(25);
   }
-
-  if (!last) {
-    str += '\n';
-  }
+  str += '\n';
 
   return str;
 };
@@ -36,11 +33,11 @@ const writeGenerator = (writer, callback) => {
     do {
       if (i === 1 && rows === 1) {
         // last time!
-        writer.write(generateRow(true), callback);
+        writer.write(generateRow(), callback);
       } else {
         // see if we should continue, or wait
         // don't pass the callback, because we're not done yet.
-        ok = writer.write(generateRow(false));
+        ok = writer.write(generateRow());
       }
     } while (i > 0 && ok);
     if (i > 0) {
