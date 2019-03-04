@@ -1,11 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable func-names */ // Disabled because arrow assignment binding is undesired effect
 
+// Getting Started:
+// The data needed for this script is not available in the repo
+// The products-cleaned.csv file is generated from the script link below:
+// https://github.com/sale-boat/service_photos_mh/blob/master/generateCsv.js
+
 const fs = require('fs');
 const { Transform } = require('stream');
 
 const start = Date.now();
-const readable = fs.createReadStream(`${__dirname}/../../dist/products-sample.csv`);
+const readable = fs.createReadStream(`${__dirname}/../../dist/products-cleaned.csv`);
 const writable = fs.createWriteStream(`${__dirname}/../../dist/products.csv`);
 const regex = /\/([^"/]+)"/g;
 let lastMatch;
@@ -49,5 +54,5 @@ addData._flush = function (done) {
 
 readable.pipe(addData).pipe(writable);
 writable.on('close', () => {
-  console.log(Date.now() - start);
+  console.log(`'Products' data took ${Date.now() - start}ms to generate`);
 });

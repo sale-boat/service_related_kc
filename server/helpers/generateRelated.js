@@ -32,17 +32,15 @@ const writeGenerator = (writer, callback) => {
     let ok = true;
     do {
       if (i === 1 && rows === 1) {
-        // last time!
+        // last iteration
         writer.write(generateRow(), callback);
       } else {
-        // see if we should continue, or wait
-        // don't pass the callback, because we're not done yet.
+        // Write and check whether to continue
         ok = writer.write(generateRow());
       }
     } while (i > 0 && ok);
     if (i > 0) {
-      // had to stop early!
-      // write some more once it drains
+      // Had to stop early, wait for drain to write more
       writer.once('drain', write);
     }
   };
@@ -51,5 +49,5 @@ const writeGenerator = (writer, callback) => {
 };
 
 writeGenerator(csv, () => {
-  console.log(Date.now() - start);
+  console.log(`'Related' data took ${Date.now() - start}ms to generate`);
 });
