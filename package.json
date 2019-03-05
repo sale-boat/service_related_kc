@@ -8,6 +8,7 @@
     "gen:related": "node ./server/helpers/generateRelated.js",
     "gen:products": "node ./server/helpers/generateProducts.js",
     "seed:postgres": "sh ./server/helpers/importPostgres.sh",
+    "seed:cassandra": "cqlsh -f ./server/helpers/cSchema.cql",
     "dev-build": "mkdir dist; cp ./src/index.html ./dist/index.html && webpack -d --watch",
     "dev-start": "nodemon",
     "start": "webpack -p && cp ./src/index.html ./dist/index.html && node index.js",

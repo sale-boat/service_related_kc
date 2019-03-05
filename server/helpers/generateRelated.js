@@ -9,7 +9,7 @@ const start = Date.now();
 let i = 10000000;
 let rows = randIdx(25);
 
-const generateData = () => `${i},${randIdx(10000000)}`;
+const generateData = () => `${i},${randIdx(10000000) + 1}`;
 
 const generateRow = () => {
   let str = '';
