@@ -28,8 +28,7 @@ CREATE TABLE products (
   thumbnail_image varchar(255)
 );
 
-COPY products(prod_id, prod_name, category, manufacturer, primary_image, secondary_images, review_one_star_count, review_two_star_count, review_three_star_count, review_four_star_count, review_five_star_count, review_count, question_count, price, total_price, stock, is_prime, prod_description, thumbnail_image)
-FROM '/Users/Kheng/Dropbox/Backup/Hack Reactor/sdc/service_related_kc/dist/products.csv' DELIMITER ',' CSV HEADER;
+COPY products(prod_id, prod_name, category, manufacturer, primary_image, secondary_images, review_one_star_count, review_two_star_count, review_three_star_count, review_four_star_count, review_five_star_count, review_count, question_count, price, total_price, stock, is_prime, prod_description, thumbnail_image) FROM '/Users/Kheng/Dropbox/Backup/Hack Reactor/sdc/service_related_kc/dist/products.csv' DELIMITER ',' CSV HEADER;
 
 CREATE INDEX prod_id_idx ON products (prod_id);
 CREATE INDEX prod_name_idx ON products (prod_name);
@@ -40,8 +39,7 @@ CREATE TABLE related (
   rel_prod_id integer
 );
 
-COPY related(src_prod_id, rel_prod_id)
-FROM '/Users/Kheng/Dropbox/Backup/Hack Reactor/sdc/service_related_kc/dist/related.csv' DELIMITER ',' CSV;
+COPY related(src_prod_id, rel_prod_id) FROM '/Users/Kheng/Dropbox/Backup/Hack Reactor/sdc/service_related_kc/dist/related.csv' DELIMITER ',' CSV;
 
 CREATE INDEX src_idx ON related (src_prod_id) INCLUDE (related_id, rel_prod_id);
 CREATE INDEX rel_idx ON related (rel_prod_id) INCLUDE (related_id, src_prod_id);
@@ -70,8 +68,7 @@ CREATE TABLE products_nest (
   related integer[]
 );
 
-COPY products_nest(prod_id, prod_name, category, manufacturer, primary_image, secondary_images, review_one_star_count, review_two_star_count, review_three_star_count, review_four_star_count, review_five_star_count, review_count, question_count, price, total_price, stock, is_prime, prod_description, thumbnail_image, related)
-FROM '/Users/Kheng/Dropbox/Backup/Hack Reactor/sdc/service_related_kc/dist/products-nested.csv' DELIMITER ',' CSV HEADER;
+COPY products_nest(prod_id, prod_name, category, manufacturer, primary_image, secondary_images, review_one_star_count, review_two_star_count, review_three_star_count, review_four_star_count, review_five_star_count, review_count, question_count, price, total_price, stock, is_prime, prod_description, thumbnail_image, related) FROM '/Users/Kheng/Dropbox/Backup/Hack Reactor/sdc/service_related_kc/dist/products-nested.csv' DELIMITER ',' CSV HEADER;
 
 CREATE INDEX prod_nest_id_idx ON products_nest (prod_id);
 CREATE INDEX prod_nest_name_idx ON products_nest (prod_name);
