@@ -40,7 +40,13 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 ## Seeding Data
 
-Use 'npm run seed-postgres' to seed data into postgres
+- Use `npm run seed:postgres` to seed data into postgres
+- Use `npm run seed:cassandra` to seed data into cassandra
+
+If data is unavailable, run:
+- `npm run gen:related` for related datasets
+- `npm run gen:products` for product datasets
+  - Requires original product dataset
 
 ## APIs
 
