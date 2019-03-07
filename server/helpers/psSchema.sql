@@ -73,5 +73,5 @@ CREATE TABLE products_nest (
 COPY products_nest(prod_id, prod_name, category, manufacturer, primary_image, secondary_images, review_one_star_count, review_two_star_count, review_three_star_count, review_four_star_count, review_five_star_count, review_count, question_count, price, total_price, stock, is_prime, prod_description, thumbnail_image, related)
 FROM '/Users/Kheng/Dropbox/Backup/Hack Reactor/sdc/service_related_kc/dist/products-nested.csv' DELIMITER ',' CSV HEADER;
 
-CREATE INDEX prod_id_idx ON products_nest (prod_id);
-CREATE INDEX prod_name_idx ON products_nest (prod_name);
+CREATE INDEX prod_nest_id_idx ON products_nest (prod_id);
+CREATE INDEX prod_nest_name_idx ON products_nest (prod_name);
