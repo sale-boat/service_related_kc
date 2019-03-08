@@ -1,32 +1,23 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const compression = require('compression');
 const router = require('./server/controllers/router.js');
 
 const app = express();
 
 app.use(morgan('tiny'));
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 app.use(cors());
 app.use(compression());
 
 app.use(express.static(`${__dirname}/dist/`));
 
 // API routes
-app.get('/api/products/(:productId)?', router.readRelationship);
-app.route('/api/related/(:id)?')
-  .get((req, res) => {
-    res.send(`Getting data: ${req.params.id}`);
-  })
-  .post((req, res) => {
-    res.send('Posting data');
-  })
-  .put((req, res) => {
-    res.send(`Updating data: ${req.params.id}`);
-  })
-  .delete((req, res) => {
-    res.send(`Deleting data: ${req.params.id}`);
-  });
+// app.get('/api/products/(:productId)?', router.readRelationship);
+app.use('/api/related', router);
 
 app.use('/:id', express.static(`${__dirname}/dist/`));
 

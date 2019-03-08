@@ -72,3 +72,9 @@ COPY products_nest(prod_id, prod_name, category, manufacturer, primary_image, se
 
 CREATE INDEX prod_nest_id_idx ON products_nest (prod_id);
 CREATE INDEX prod_nest_name_idx ON products_nest (prod_name);
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO carousel;
+
+SELECT setval(pg_get_serial_sequence('products', 'id'), max(related_id)) FROM products;
+SELECT setval(pg_get_serial_sequence('related', 'related_id'), max(related_id)) FROM related;
+SELECT setval(pg_get_serial_sequence('products_nest', 'id'), max(related_id)) FROM products_nest;
