@@ -8,7 +8,17 @@ router.get('/:id', (req, res) => {
     if (err) {
       res.status(400).send(err);
     } else {
-      res.status(200).send(data);
+      const retData = data.map(row => ({
+        id: row.rel_id,
+        name: row.prod_name,
+        avgReview: row.avg_review,
+        price: row.price,
+        isPrime: row.is_prime,
+        reviewCount: row.review_count,
+        image: row.thumbnail_image,
+        category: 'product',
+      }));
+      res.status(200).send(retData);
     }
   });
 });
