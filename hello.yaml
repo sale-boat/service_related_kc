@@ -1,0 +1,12 @@
+config:
+  target: 'http://localhost:3007'
+  phases:
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 400
+    - duration: 300
+      arrivalRate: 400
+scenarios:
+  - flow:
+    - get:
+        url: "/api/related/{{ $randomNumber(1, 10000000) }}"
