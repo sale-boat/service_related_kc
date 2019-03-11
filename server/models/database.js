@@ -51,50 +51,63 @@ const getRelated = (prodId, sendToClient) => {
   sendQuery(queryStr, sendToClient);
 };
 
-const addRelated = (prodId, relId, sendToClient) => {
+const addRelated = (row, sendToClient) => {
   // Related products
-  // const queryStr = `
-
-  // `;
+  const queryStr = `
+    INSERT INTO related_products (prod_id, rel_id, slug, prod_name, avg_review, price, is_prime, review_count, thumbnail_image)
+    VALUES (${row.prodId},${row.relId},'${row.prodName}${row.relId}','${row.prodName}',${row.avgReview},'${row.price}',${row.isPrime},${row.reviewCount},'${row.thumbnailImage}')
+    RETURNING id
+  `;
 
   // Product nest
-  const queryStr = `
-    UPDATE products_nest
-    SET related = CASE WHEN related @> ARRAY[${relId}] THEN related ELSE array_append(related, ${relId}) END
-    WHERE prod_id = ${prodId}
-    RETURNING *
-  `;
+  // const queryStr = `
+  //   UPDATE products_nest
+  //   SET related = CASE WHEN related @> ARRAY[${row.relId}] THEN related ELSE array_append(related, ${row.relId}) END
+  //   WHERE prod_id = ${row.prodId}
+  //   RETURNING *
+  // `;
 
   sendQuery(queryStr, sendToClient);
 };
 
 const updateRelated = (prodId, oldRelId, newRelId, sendToClient) => {
   // Related products
-
-
-  // Product nest
   const queryStr = `
-    UPDATE products_nest
-    SET related = array_replace(related, ${oldRelId}, ${newRelId})
+    UPDATE related_products
+    SET rel_id = ${newRelId}
     WHERE prod_id = ${prodId}
+      AND rel_id = ${oldRelId}
     RETURNING *
   `;
+
+  // Product nest
+  // const queryStr = `
+  //   UPDATE products_nest
+  //   SET related = array_replace(related, ${oldRelId}, ${newRelId})
+  //   WHERE prod_id = ${prodId}
+  //   RETURNING *
+  // `;
 
   sendQuery(queryStr, sendToClient);
 };
 
 const deleteRelated = (prodId, relId, sendToClient) => {
   // Related products
-
-
-  // Product nest
   const queryStr = `
-    UPDATE products_nest
-    SET related = array_remove(related, ${relId})
+    DELETE FROM related_products
     WHERE prod_id = ${prodId}
+      AND rel_id = ${relId}
     RETURNING *
   `;
-  
+
+  // Product nest
+  // const queryStr = `
+  //   UPDATE products_nest
+  //   SET related = array_remove(related, ${relId})
+  //   WHERE prod_id = ${prodId}
+  //   RETURNING *
+  // `;
+
   sendQuery(queryStr, sendToClient);
 };
 

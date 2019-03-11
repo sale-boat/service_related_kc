@@ -10,6 +10,7 @@
     "gen:aws": "node ./server/helpers/generateDataAWS.js",
     "seed:postgres": "sh ./server/helpers/importPostgres.sh",
     "seed:cassandra": "cqlsh -f ./server/helpers/cSchema.cql",
+    "seed:aws": "sh ./server/helpers/importPostgresAWS.sh",
     "dev-build": "mkdir dist; cp ./src/index.html ./dist/index.html && webpack -d --watch",
     "dev-start": "nodemon",
     "start": "webpack -p && cp ./src/index.html ./dist/index.html && node index.js",

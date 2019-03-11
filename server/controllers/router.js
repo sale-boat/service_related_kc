@@ -24,11 +24,22 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/:id', (req, res) => {
-  db.addRelated(req.params.id, req.body.relId, (err, data) => {
+  const bodyData = {
+    prodId: req.params.id,
+    relId: req.body.relId,
+    prodName: req.body.prodName,
+    avgReview: req.body.avgReview,
+    price: req.body.price,
+    isPrime: req.body.isPrime,
+    reviewCount: req.body.reviewCount,
+    thumbnailImage: req.body.thumbnailImage,
+  };
+
+  db.addRelated(bodyData, (err, data) => {
     if (err) {
       res.status(400).send(err);
     } else {
-      res.status(201).send(data);
+      res.status(201).send(data[0]);
     }
   });
 });
@@ -38,7 +49,7 @@ router.patch('/:id', (req, res) => {
     if (err) {
       res.status(400).send(err);
     } else {
-      res.status(200).send(data);
+      res.status(200).send(data[0]);
     }
   });
 });
@@ -48,7 +59,7 @@ router.delete('/:id', (req, res) => {
     if (err) {
       res.status(400).send(err);
     } else {
-      res.status(200).send(data);
+      res.status(200).send(data[0]);
     }
   });
 });

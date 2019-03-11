@@ -73,6 +73,8 @@
 -- CREATE INDEX prod_nest_id_idx ON products_nest (prod_id);
 -- CREATE INDEX prod_nest_name_idx ON products_nest (prod_name);
 
+DROP TABLE IF EXISTS related_products;
+
 CREATE TABLE related_products (
   id SERIAL PRIMARY KEY,
   prod_id integer,
@@ -88,11 +90,14 @@ CREATE TABLE related_products (
 
 COPY related_products(prod_id, rel_id, slug, prod_name, avg_review, price, is_prime, review_count, thumbnail_image) FROM '/Users/Kheng/Dropbox/Backup/Hack Reactor/sdc/service_related_kc/dist/related-products.csv' DELIMITER ',' CSV;
 
+COPY related_products(prod_id, rel_id, slug, prod_name, avg_review, price, is_prime, review_count, thumbnail_image) FROM '/home/ubuntu/service_related_kc/dist/related-products.csv' DELIMITER ',' CSV;
+
 CREATE INDEX rel_prods_prod_id_idx ON related_products (prod_id);
 CREATE INDEX rel_prods_rel_id_idx ON related_products (rel_id);
 CREATE INDEX rel_prods_slug_idx ON related_products (slug);
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO carousel;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO carousel;
 
 -- SELECT setval(pg_get_serial_sequence('products', 'id'), max(id)) FROM products;
 -- SELECT setval(pg_get_serial_sequence('related', 'related_id'), max(related_id)) FROM related;
