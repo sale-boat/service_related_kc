@@ -3,11 +3,9 @@ config:
   phases:
     - duration: 120
       arrivalRate: 5
-      rampTo: 300
-    - duration: 300
-      arrivalRate: 300
-  # http:
-  #   pool: 20
+      rampTo: 250
+    - duration: 120
+      arrivalRate: 250
 scenarios:
   - flow:
     - get:
