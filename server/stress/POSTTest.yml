@@ -1,0 +1,20 @@
+config:
+  target: 'http://localhost:3007'
+  phases:
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 200
+    - duration: 60
+      arrivalRate: 200
+scenarios:
+  - flow:
+    - post:
+        url: "/api/related/{{ $randomNumber(1, 10000000) }}"
+        json:
+          relId: "{{ $randomNumber(1, 10000000) }}"
+          prodName: "{{ $randomString() }}"
+          avgReview: "{{ $randomNumber(1, 5) }}"
+          price: "{{ $randomString() }}"
+          isPrime: false
+          reviewCount: "{{ $randomNumber(1, 250) }}"
+          thumbnailImage: "{{ $randomString() }}"

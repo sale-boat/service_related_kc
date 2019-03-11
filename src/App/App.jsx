@@ -46,8 +46,8 @@ class App extends React.Component {
 
   fetchProducts() {
     const { pathname } = window.location;
-    const productNumber = pathname.split('/')[1];
-    return axios.get(`/api/products/${productNumber}`)
+    const productNumber = parseInt(pathname.split('/')[1], 10) ? pathname.split('/')[1] : 1;
+    return axios.get(`/api/related/${productNumber}`)
       .then(({ data }) => {
         this.setState({ products: data });
       })

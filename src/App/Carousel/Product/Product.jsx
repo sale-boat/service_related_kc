@@ -9,16 +9,16 @@ const concatUrl = id => `https://res.cloudinary.com/dcywbu46z/image/upload/w_160
 
 const Product = ({
   product: {
-    id, name, avgReview, price, isPrime, reviewCount,
+    id, name, avgReview, price, isPrime, reviewCount, image,
   },
 }) => (
   <div className={product.column}>
-    <a href={`/products/${id}`}>
+    <a href={`/${id}`}>
       <div className={product.ad_image}>
-        <div style={{ background: `url(${concatUrl(id)}`, backgroundSize: 'cover', height: '160px' }} alt="product was here" />
+        <div style={{ background: `url(${image})`, backgroundSize: 'cover', height: '160px' }} alt="product was here" />
       </div>
     </a>
-    <a href={`/products/${id}`} className={product.name}>{name}</a>
+    <a href={`/${id}`} className={product.name}>{name}</a>
     <div className={product.row}>
       <Rating avgReview={avgReview} />
       <span className={product.review_count}>
@@ -45,6 +45,7 @@ Product.propTypes = {
     isPrime: propTypes.bool.isRequired,
     reviewCount: propTypes.number.isRequired,
     category: propTypes.string.isRequired,
+    image: propTypes.string.isRequired,
   }).isRequired,
 };
 
