@@ -98,6 +98,7 @@ CREATE INDEX rel_prods_slug_idx ON related_products (slug);
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO carousel;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO carousel;
+ALTER ROLE carousel WITH LOGIN;
 
 -- SELECT setval(pg_get_serial_sequence('products', 'id'), max(id)) FROM products;
 -- SELECT setval(pg_get_serial_sequence('related', 'related_id'), max(related_id)) FROM related;
