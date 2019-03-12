@@ -4,23 +4,52 @@ const config = require('../../config');
 
 const pool = new Pool(config);
 
+pool.on('error', (err) => {
+  console.error('Unexpected error on idle client', err);
+  process.exit(-1);
+});
+
 const sendQuery = (queryStr, sendToClient) => {
-  nr.startSegment('pg:connect', true, cb => pool.connect(cb), (err, client, release) => {
-    if (err) {
-      release();
-      console.error('Failed to connect to db', err.stack);
-    } else {
-      nr.startSegment('pg:query', true, cb => client.query(queryStr, cb), (e, data) => {
-        release();
-        if (e) {
-          sendToClient(e.stack, null);
-        } else {
-          sendToClient(null, data.rows);
-        }
-      });
-    }
-  });
+  nr.startSegment('pool:query', true, () => pool.query(queryStr))
+    .then((res) => {
+      sendToClient(null, res.rows);
+    })
+    .catch((err) => {
+      sendToClient(err, null);
+    });
 };
+
+// const sendQuery = (queryStr, sendToClient) => {
+//   nr.startSegment('pg:connect', true, () => pool.connect())
+//     .then((client) => {
+//       nr.startSegment('pg:query', true, () => client.query(queryStr))
+//         .then((res) => {
+//           sendToClient(null, res.rows);
+//         })
+//         .catch((err) => {
+//           sendToClient(err, null);
+//         })
+//         .finally(() => client.release());
+//     });
+// };
+
+// const sendQuery = (queryStr, sendToClient) => {
+//   nr.startSegment('pg:connect', true, cb => pool.connect(cb), (err, client, release) => {
+//     if (err) {
+//       release();
+//       console.error('Failed to connect to db', err.stack);
+//     } else {
+//       nr.startSegment('pg:query', true, cb => client.query(queryStr, cb), (e, data) => {
+//         release();
+//         if (e) {
+//           sendToClient(e.stack, null);
+//         } else {
+//           sendToClient(null, data.rows);
+//         }
+//       });
+//     }
+//   });
+// };
 
 const getRelated = (prodId, sendToClient) => {
   // Related products

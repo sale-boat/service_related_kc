@@ -20,4 +20,3 @@ app.use('/api/related', router);
 app.use('/:id', express.static(`${__dirname}/dist/`));
 
 app.listen(3007, console.log('listening to 3007'));
-// app.listen(80, console.log('listening to 80'));
