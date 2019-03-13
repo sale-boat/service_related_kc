@@ -93,6 +93,7 @@ COPY related_products(prod_id, rel_id, slug, prod_name, avg_review, price, is_pr
 COPY related_products(prod_id, rel_id, slug, prod_name, avg_review, price, is_prime, review_count, thumbnail_image) FROM '/home/ubuntu/service_related_kc/dist/related-products.csv' DELIMITER ',' CSV;
 
 CREATE INDEX rel_prods_prod_id_idx ON related_products (prod_id);
+-- CREATE INDEX rel_prods_prod_id_idx ON related_products (prod_id) INCLUDE (rel_id, prod_name, avg_review, price, is_prime, review_count, thumbnail_image);
 CREATE INDEX rel_prods_rel_id_idx ON related_products (rel_id);
 CREATE INDEX rel_prods_slug_idx ON related_products (slug);
 
